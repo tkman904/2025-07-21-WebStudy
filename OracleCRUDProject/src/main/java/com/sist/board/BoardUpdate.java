@@ -37,7 +37,7 @@ public class BoardUpdate extends HttpServlet {
 		out.println("<body>");
 			
 		out.println("<h1>수정하기</h1>");
-		out.println("<form method=post action=BoardInsert>");
+		out.println("<form method=post action=BoardUpdate>");
 		out.println("<table id= table_content width= 600>");
 		out.println("<tr>");
 		out.println("<th width=20%>이름</th>");

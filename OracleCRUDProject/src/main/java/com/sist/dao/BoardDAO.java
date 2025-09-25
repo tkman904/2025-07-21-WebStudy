@@ -127,7 +127,7 @@ public class BoardDAO {
 			   getConnection();
 			   String sql = "INSERT INTO web_board(no, name, subject, content, pwd) "
 			   		+ "VALUES(wb_no_seq.nextval, ?, ?, ?, ?)";
-			   ps=conn.prepareStatement(sql);
+			   ps = conn.prepareStatement(sql);
 			   ps.setString(1, vo.getName());
 			   ps.setString(2, vo.getSubject());
 			   ps.setString(3, vo.getContent());
@@ -148,7 +148,7 @@ public class BoardDAO {
 		   try {
 			   getConnection();
 			   // SQL => hit를 증가
-			   String sql="UPDATE web_board SET "
+			   String sql = "UPDATE web_board SET "
 			   		+ "hit=hit+1 "
 			   		+ "WHERE no=?";
 			   ps = conn.prepareStatement(sql);
@@ -156,14 +156,14 @@ public class BoardDAO {
 			   // 실행
 			   ps.executeUpdate();
 			   
-			   sql="SELECT no, name, subject, content, hit, "
+			   sql = "SELECT no, name, subject, content, hit, "
 			   		+ "TO_CHAR(regdate, 'yyyy-mm-dd hh24:mi:ss') "
 			   		+ "FROM web_board "
 			   		+ "WHERE no=?";
 			   ps = conn.prepareStatement(sql);
 			   ps.setInt(1, no);
 			   
-			   ResultSet rs=ps.executeQuery();
+			   ResultSet rs = ps.executeQuery();
 			   rs.next();
 			   vo.setNo(rs.getInt(1));
 			   vo.setName(rs.getString(2));
@@ -186,13 +186,13 @@ public class BoardDAO {
 		   BoardDTO vo = new BoardDTO();
 		   try {
 			   getConnection();
-			   String sql="SELECT no, name, subject, content "
+			   String sql = "SELECT no, name, subject, content "
 			   		+ "FROM web_board "
 			   		+ "WHERE no=?";
 			   ps = conn.prepareStatement(sql);
 			   ps.setInt(1, no);
 			   
-			   ResultSet rs=ps.executeQuery();
+			   ResultSet rs = ps.executeQuery();
 			   rs.next();
 			   vo.setNo(rs.getInt(1));
 			   vo.setName(rs.getString(2));

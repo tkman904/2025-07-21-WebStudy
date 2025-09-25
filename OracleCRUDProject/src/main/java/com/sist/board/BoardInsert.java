@@ -20,7 +20,7 @@ public class BoardInsert extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		// 2. 어떤 브라우저에 HTML을 전송할지 확인
-		PrintWriter out=response.getWriter();
+		PrintWriter out = response.getWriter();
 		
 		out.println("<html>");
 		out.println("<head>");
