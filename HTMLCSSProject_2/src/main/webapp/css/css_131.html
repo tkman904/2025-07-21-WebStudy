@@ -1,0 +1,35 @@
+<!-- 
+	ID속성 => id (모든 태그가 가지고 있다)
+	<img id="li">
+	<img id="i2">
+	  => 같은 파일에서 중복적으로 사용하면 안된다
+	  => HTML은 유연하다
+	  => id는 문자로 시작
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#i1, #i3, #i2 {
+  	width: 150px;
+  	height: 200px;
+}
+</style>
+<!--
+<script type="text/javascript">
+	window.onload = function() {
+		let img = document.getElementById("i1");
+		img.style.width = 200;
+		img.style.height = 300;
+	}
+</script>
+-->
+</head>
+<body>
+  <img src="mm1.jpg" id="i3">
+  <img src="mm2.jpg" id="i1">
+  <img src="mm3.jpg" id="i2">
+</body>
+</html>
