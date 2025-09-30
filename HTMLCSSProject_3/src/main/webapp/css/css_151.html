@@ -1,0 +1,55 @@
+<!-- 
+	색상 / URL 단위
+	색상 단위
+		=> color : 글자 색상
+		   background-color : 배경 색상
+		   
+		   background-color : 등록된 색상
+		   						white / orange ...
+		   background-color : rgb(255, 255, 255)
+		   background-color : #9D8ACC => HTML 색상표
+		   background-color : rgba(255, 255, 255, 0.1)
+		   						 -- 알파 (투명) => 0.0 ~ 1.0 소수점이 작아질수록 투명
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+p:nth-child(1) {
+	background-color: red;
+	color: white;
+}
+p:nth-child(2) {
+	font-size: 1.5em;
+	background-color: rgb(0, 0, 255);
+}
+p:nth-child(3) {
+	font-size: 2em;
+	background-color: #00ff00;
+}
+p:nth-child(4) {
+	font-size: 150%;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+div {
+	width: 500px;
+	height: 500px;
+	background-color: #ff00ff;
+}
+h1 {
+	color: white;
+}
+</style>
+</head>
+<body>
+  <p>[단독] 운항 직전에 2척 인수…</p>
+  <p>오세훈, 한강버스 운항 중단 “송구”</p>
+  <p>충분한 시운전을 했다는 서울시의 해명과 달리, 선박 두 척은 운항 개시 불과 이틀 전에 한강에 도착했던 것으로 드러났습니다.</p>
+  <p>한강버스는 강 위에서 멈추고, 출항 10분 만에 회항하는 등 운항 열흘 만에 네 차례나 고장을 일으켰습니다.</p>
+  <div>
+    <h1>촉박했던 인수 일정을 따져보면, 한강버스 운항 중단은 예정됐던 수순이라는 지적이 나옵니다.</h1>
+  </div>
+</body>
+</html>
