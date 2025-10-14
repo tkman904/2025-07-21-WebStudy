@@ -1,6 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<?xml version="1.0" encoding="utf-8"?>
+<%@ page language="java" contentType="text/xml; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--
+     1장
+       = 웹은 클라이언트 - 서버 구조
+       = 정적 페이지 : 파일 요청시 파일 그대로 응답 (HTML/CSS)
+       = 동적 페이지 : 파일 요청시에 데이터를 변경해서 응답
+                  (JSP / Servlet)
+       = 동작 
+         브라우저(클라이언트) - 요청(request) - 서버 
+         서버 - 처리후 - 응답(response) - 브라우저
+                    --------------
 					1) HTML => contentType="text/html"
 					-----------------------------------
 					   => 일반 JSP 번역
@@ -95,15 +105,69 @@
 	      |  |lib => 라이브러리 (.jar)
 	      |  |config => xml파일, properties
 	      | jsp => web파일
-	       
+	      
+	   1) JSP 구조
+	      java+html
+	      ---------
+	      구분 => <% %> : 스크립트릿
+	             <%= %> : 화면에 자바 데이터 출력
+	               => out.println()
+	             <%! %> : 선언식 : 멤버변수, 메소드
+	               => 보안 , 소스노출 => 사용빈도가 거의 없다
+	      실행 : jsp => servlet
+	             | 자바파일 변경 => 컴파일 => 실행
+	             | 한번 변경시에 속도가 늦다 (1회성)
+	   2) 지시자 139page
+	   3) 내장 객체 / 기본 객체 => 9개
+	   4) 파일 업로드 / 파일 다운로드
+	      cos.jar => tomcat 9
+	      | javax (X)
+	      | commons-fileupload
+	   5) 세션 / 쿠키
+	   6) 데이터베이스 => Mybatis
+	   7) 예제 : 로그인 / 장바구니 / 회원 / 게시판
+	            ------------------------- Ajax
+	   8) JSTL / EL (*******)
+	      => 실전 : Spring / Spring-Boot
+	   9) MVC => 1차 프로젝트
+	      | Spring은 MVC로 만들어져 있다
+	-----------------------------------------------
+	139page
+	  지시자
+	   |
+	  **page / include / **taglib
+	           | <jsp:include>
+	  ** page 지시자 : jsp파일에 대한 정보
+	     사용법
+	      <%@ 지시자 속성="값" 속성="값"...%>
+	      => 첫줄에 코딩
+	      **=> contentType : 브라우저에 전송 방법
+	           ***1 html => text/html;charset=UTF-8
+	           2 xml  => text/xml;charset=UTF-8
+	           ***3 json => text/plain;charset=UTF-8
+	      => errorPage
+	      **=> isErrorPage
+	      => buffer
+	      **=> import
+	      => info
  --%>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+  <h1>ContentType:text/html</h1>
 </body>
-</html>
+</html> -->
+<sawon>
+  <list>
+    <name>홍길동</name>
+    <sex>남자</sex>
+  </list>
+  <list>
+    <name>심청이</name>
+    <sex>여자</sex>
+  </list>
+</sawon>
