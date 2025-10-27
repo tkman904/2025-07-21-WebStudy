@@ -38,8 +38,8 @@ public class MainModel {
 		}
 		
 		// 데이터 전송
-		request.setAttribute("list", list);
-		request.setAttribute("curpage", curpage);
+		request.setAttribute("list", list); // ${list}
+		request.setAttribute("curpage", curpage); // ${curpage}
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

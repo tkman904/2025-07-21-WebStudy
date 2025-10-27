@@ -31,6 +31,7 @@ public class FoodDAO {
 	}
 	
 	/*
+	 *    <!-- 총페이지 -->
 	 *    <select id="foodTotalPage" resultType="int">
      *      SELECT CEIL(COUNT(*)/12.0)
      *      FROM menupan_food
@@ -41,5 +42,34 @@ public class FoodDAO {
 		int total = session.selectOne("foodTotalPage");
 		session.close();
 		return total;
+	}
+	
+	/*
+	 *    <!-- 상세보기 : 조회수 증가 -->
+	 *    <update id="hitIncrement" parameterType="int">
+     *      UPDATE menupan_food SET hit=hit+1
+     *      WHERE fno=#{fno}
+     *    </update>
+     *
+     *    <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+     *      SELECT * FROM menupan_food
+     *      WHERE fno=#{fno}
+     *    </select>
+     *    
+     *    JSP => 요청 (form / a)
+     *     |
+     *    Mapper
+     *     |
+     *    DAO
+     *     |
+     *    Model =====> JSP에서 출력
+	 */
+	public static FoodVO foodDetailData(int fno) {
+		SqlSession session = ssf.openSession();
+		session.update("hitIncrement", fno);
+		session.commit();
+		FoodVO vo = session.selectOne("foodDetailData", fno);
+		session.close();
+		return vo;
 	}
 }

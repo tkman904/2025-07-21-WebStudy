@@ -39,4 +39,14 @@
      SELECT CEIL(COUNT(*)/12.0)
      FROM menupan_food
    </select>
+   
+   <!-- 상세보기 : 조회수 증가 -->
+   <update id="hitIncrement" parameterType="int">
+     UPDATE menupan_food SET hit=hit+1
+     WHERE fno=#{fno}
+   </update>
+   <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+     SELECT * FROM menupan_food
+     WHERE fno=#{fno}
+   </select>
 </mapper>

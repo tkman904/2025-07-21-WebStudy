@@ -21,16 +21,13 @@ p {
 <body>
   <div class="container">
     <div class="row">
-      <%--
-		  for(FoodVO vo : list)
-       --%>
       <c:forEach var="vo" items="${list }">
         <div class="col-md-3">
           <div class="thumbnail">
-            <a href="../food/detail.do?fno=${vo.fno }&page=${curpage }">
+            <a href="../music/detail.do?no=${vo.no }&page=${curpage }">
               <img src="${vo.poster }" style="width:230px; height: 150px;">
               <div class="caption">
-                <p>${vo.name }</p>
+                <p>${vo.title }</p>
               </div>
             </a>
           </div>
@@ -43,19 +40,19 @@ p {
         	if(startPage>1)
          --%>
         <c:if test="${startPage>1 }">
-          <li><a href="../main/main.do?page=${startPage-1 }">&lt;</a></li>
+          <li><a href="../music/list.do?page=${startPage-1 }">&lt;</a></li>
         </c:if>
         <%--
         	for(int i=startPage;i<=endPage;i++)
          --%>
         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-          <li ${i==curpage?"class=active":"" }><a href="../main/main.do?page=${i }">${i }</a></li>
+          <li ${i==curpage?"class=active":"" }><a href="../music/list.do?page=${i }">${i }</a></li>
         </c:forEach>
         <%--
         	if(endPage<totalpage)
          --%>
         <c:if test="${endPage<totalpage }">
-          <li><a href="../main/main.do?page=${endPage+1 }">&gt;</a></li>
+          <li><a href="../music/list.do?page=${endPage+1 }">&gt;</a></li>
         </c:if>
       </ul>
     </div>
