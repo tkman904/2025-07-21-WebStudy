@@ -44,4 +44,43 @@ public class MusicDAO {
 		session.close();
 		return vo;
 	}
+	
+	/*
+	 *   <!-- 장르별 -->
+  <select id="musicTypeListData" resultType="MusicVO" parameterType="hashmap">
+    SELECT no, cno, title, poster
+    FROM genie_music
+    WHERE type LIKE '%'||#{cno}||'%'
+    ORDER BY no ASC
+    OFFSET #{start} ROWS FETCH NEXT 12 ROWS ONLY
+  </select>
+  <select id="musicTypeTotalPage" resultType="int" parameterType="string">
+    SELECT CEIL(COUNT(*)/12.0)
+    FROM genie_music
+    WHERE type LIKE '%'||#{cno}||'%'
+  </select> 
+	 */
+	public static List<MusicVO> musicTypeListData(Map map) {
+		List<MusicVO> list = null;
+		try {
+			SqlSession session = ssf.openSession();
+			list = session.selectList("musicTypeListData", map);
+			session.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static int musicTypeTotalPage(int cno) {
+		int total = 0;
+		try {
+			SqlSession session = ssf.openSession();
+			total = session.selectOne("musicTypeTotalPage", cno);
+			session.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return total;
+	}
 }

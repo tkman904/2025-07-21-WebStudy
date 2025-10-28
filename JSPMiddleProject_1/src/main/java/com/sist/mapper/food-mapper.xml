@@ -34,19 +34,59 @@
     	{} = get(), getName(), getAttribute()
      -->
      
-   <!-- 총페이지 -->
-   <select id="foodTotalPage" resultType="int">
-     SELECT CEIL(COUNT(*)/12.0)
-     FROM menupan_food
-   </select>
+  <!-- 총페이지 -->
+  <select id="foodTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/12.0)
+    FROM menupan_food
+  </select>
    
-   <!-- 상세보기 : 조회수 증가 -->
-   <update id="hitIncrement" parameterType="int">
-     UPDATE menupan_food SET hit=hit+1
-     WHERE fno=#{fno}
-   </update>
-   <select id="foodDetailData" resultType="FoodVO" parameterType="int">
-     SELECT * FROM menupan_food
-     WHERE fno=#{fno}
-   </select>
+  <!-- 상세보기 : 조회수 증가 -->
+  <update id="hitIncrement" parameterType="int">
+    UPDATE menupan_food SET hit=hit+1
+    WHERE fno=#{fno}
+  </update>
+  <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+    SELECT * FROM menupan_food
+    WHERE fno=#{fno}
+  </select>
+   
+  <!-- 음식 종류별 -->
+  <select id="foodTypeListData" resultType="FoodVO" parameterType="hashmap">
+    SELECT fno, name, poster, type
+    FROM menupan_food
+    WHERE type LIKE '%'||#{type}||'%'
+    ORDER BY fno ASC
+    OFFSET #{start} ROWS FETCH NEXT 12 ROWS ONLY
+    <!-- 
+       MySQL : LIMIT start, 12
+       Oracle : Inline View
+       
+       name
+       subject
+       content
+       
+       name+subject
+       name+content
+       name+subject+content
+       subject+content
+     -->
+  </select>
+  <select id="foodTypeTotalPage" resultType="int" parameterType="string">
+    SELECT CEIL(COUNT(*)/12.0)
+    FROM menupan_food
+    WHERE type LIKE '%'||#{type}||'%'
+    <!-- 
+    	 MySQL : WHERE type LIKE CONCAT('%', #{type}, '%')
+    	 NVL = IFNULL, TO_CHAR = DATE_FORMAT
+     -->
+  </select>
+  <select id="foodFindListData" resultType="FoodVO" parameterType="hashmap">
+    SELECT fno, name, poster, address
+    FROM menupan_food
+    WHERE ${column} LIKE '%'||#{ss}||'%'
+    <!-- 
+      WHERE 'address' LIKE ~
+      $ = table, column
+     -->
+  </select>
 </mapper>

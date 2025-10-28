@@ -60,4 +60,41 @@ public class MusicModel {
 		request.setAttribute("main_jsp", "../music/detail.jsp");
 		return "../main/main.jsp";
 	}
+	
+	@RequestMapping("music/type.do")
+	public String music_type(HttpServletRequest request, HttpServletResponse response) {
+		String cno = request.getParameter("cno");
+		String page = request.getParameter("page");
+		if(page==null)
+			page = "1";
+		if(cno==null)
+			cno = "2";
+		
+		int curpage = Integer.parseInt(page);
+		Map map = new HashMap();
+		int rowSize = 12;
+		int start = (curpage-1)*rowSize;
+		
+		map.put("start", start);
+		map.put("cno", cno);
+		
+		List<MusicVO> list = MusicDAO.musicTypeListData(map);
+		int totalpage = MusicDAO.musicTypeTotalPage(Integer.parseInt(cno));
+		
+		final int BLOCK = 10;
+		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage = totalpage;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("cno", cno);
+		
+		request.setAttribute("main_jsp", "../music/type.jsp");
+		return "../main/main.jsp";
+	}
 }
