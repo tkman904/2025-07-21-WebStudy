@@ -31,5 +31,11 @@
     SELECT CEIL(COUNT(*)/12.0)
     FROM genie_music
     WHERE cno LIKE '%'||#{cno}||'%'
-  </select> 
+  </select>
+  
+  <select id="musicFindListData" resultType="MusicVO" parameterType="hashmap">
+    SELECT no, title, poster, singer
+    FROM genie_music
+    WHERE ${column} LIKE '%'||#{ss}||'%'
+  </select>
 </mapper>

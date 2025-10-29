@@ -8,7 +8,11 @@ import com.sist.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.PrintWriter;
 import java.util.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 @Controller
 public class FoodModel {
@@ -97,5 +101,30 @@ public class FoodModel {
 		request.setAttribute("list", list);
 		request.setAttribute("main_jsp", "../food/find.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("food/food_list.do")
+	public void food_ajax_list(HttpServletRequest request, HttpServletResponse response) {
+		String type = request.getParameter("type");
+		if(type==null)
+			type="한식";
+		List<FoodVO> list = FoodDAO.foodAjaxListData(type);
+		// List => Array
+		JSONArray arr = new JSONArray();
+		// VO = Object
+		for(FoodVO vo : list) {
+			JSONObject obj = new JSONObject();
+			obj.put("fno", vo.getFno());
+			obj.put("poster", vo.getPoster());
+			obj.put("name", vo.getName());
+			arr.add(obj);
+		}
+		try {
+			response.setContentType("text/plain;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(arr.toJSONString());
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

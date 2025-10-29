@@ -83,4 +83,23 @@ public class MusicDAO {
 		}
 		return total;
 	}
+	
+	/*
+	 *   <select id="musicFindListData" resultType="MusicVO" parameterType="hashmap">
+	       SELECT no, title, poster, singer
+	       FROM genie_music
+	       WHERE ${column} LIKE '%'||#{ss}||'%'
+	     </select>
+	 */
+	public static List<MusicVO> musicFindListData(Map map) {
+		List<MusicVO> list = null;
+		try { 
+			SqlSession session = ssf.openSession();
+			list = session.selectList("musicFindListData", map);
+			session.close(); 
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
 }

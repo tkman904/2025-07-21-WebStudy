@@ -97,4 +97,22 @@ public class MusicModel {
 		request.setAttribute("main_jsp", "../music/type.jsp");
 		return "../main/main.jsp";
 	}
+	
+	@RequestMapping("music/find.do")
+	public String music_find(HttpServletRequest request, HttpServletResponse response) {
+		String column = request.getParameter("column");
+		String ss = request.getParameter("ss");
+		if(ss==null)
+			ss = "멜로망스";
+		if(column==null)
+			column = "singer";
+		Map map = new HashMap();
+		map.put("ss", ss);
+		map.put("column", column);
+		List<MusicVO> list = MusicDAO.musicFindListData(map);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("main_jsp", "../music/find.jsp");
+		return "../main/main.jsp";
+	}
 }
