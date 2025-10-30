@@ -38,6 +38,28 @@ $(function() {
 			$('#pwd').focus()
 			return
 		}
+		
+		let no = $('#no').val() 
+			
+		$.ajax({
+			type:'POST',
+			url:'../board/update_ok.do',
+			data:$('#frm').serialize(),
+			success:function(result) {
+				if(result==='yes') {
+					location.href = "../board/detail.do?no="+no
+				} else {
+					alert("비밀번호가 틀렸습니다")
+					$('#pwd').val("")
+					$('#pwd').focus()
+				}
+			},
+			error:function(error) {
+				console.log(error.responseText)
+			}
+		})
+		//let a = $('#frm').serialize()
+		//console.log(a)
 	})
 })
 </script>
@@ -46,31 +68,32 @@ $(function() {
   <div class="container">
     <div class="row">
       <h1 class="text-center">수정하기</h1>
+      <form id="frm">
       <!-- <form method="post" action="../board/update_ok.do"> -->
         <table class="table">
           <tr>
             <th width="15%" class="text-center">이름</th>
             <td width="85%">
-              <input type="text" id="name" size="20" class="input-sm" value="${vo.name}">
-              <input type="hidden" name="no" value="${vo.no}">
+              <input type="text" name="name" id="name" size="20" class="input-sm" value="${vo.name}">
+              <input type="hidden" name="no" id="no" value="${vo.no}">
             </td>
           </tr>
           <tr>
             <th width="15%" class="text-center">제목</th>
             <td width="85%">
-              <input type="text" id="subject" size="50" class="input-sm" value="${vo.subject}">
+              <input type="text" name="subject" id="subject" size="50" class="input-sm" value="${vo.subject}">
             </td>
           </tr>
           <tr>
             <th width="15%" class="text-center">내용</th>
             <td width="85%">
-              <textarea rows="10" cols="50" id="content">${vo.content}</textarea>
+              <textarea rows="10" cols="50" name="content" id="content">${vo.content}</textarea>
             </td>
           </tr>
           <tr>
             <th width="15%" class="text-center">비밀번호</th>
             <td width="85%">
-              <input type="password" id="pwd" size="10" class="input-sm">
+              <input type="password" name="pwd" id="pwd" size="10" class="input-sm">
             </td>
           </tr>
           <tr>
@@ -86,6 +109,7 @@ $(function() {
            --%>
         </table>
       <!-- </form> -->
+      </form>
     </div>
   </div>
 </body>
